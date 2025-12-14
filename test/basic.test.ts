@@ -1,8 +1,8 @@
-import tap from 'tap'
 import FormData from 'form-data'
+import { test, TestContext } from 'node:test'
 import { build } from './build-server'
 
-tap.test('mercurius-upload - should work', async (t) => {
+test('mercurius-upload - should work', async (t: TestContext) => {
   const server = build()
   await server.ready()
 
@@ -32,13 +32,13 @@ tap.test('mercurius-upload - should work', async (t) => {
     payload: body,
   })
 
-  t.equal(res.statusCode, 200)
-  t.same(JSON.parse(res.body), { data: { uploadImage: fileData } })
+  t.assert.strictEqual(res.statusCode, 200)
+  t.assert.deepStrictEqual(JSON.parse(res.body), { data: { uploadImage: fileData } })
 
   await server.close()
 })
 
-tap.test('Normal gql query should work', async (t) => {
+test('Normal gql query should work', async (t: TestContext) => {
   const server = build()
   await server.ready()
 
@@ -55,8 +55,8 @@ tap.test('Normal gql query should work', async (t) => {
     }),
   })
 
-  t.equal(res.statusCode, 200)
-  t.same(JSON.parse(res.body), {
+  t.assert.strictEqual(res.statusCode, 200)
+  t.assert.deepStrictEqual(JSON.parse(res.body), {
     data: {
       add: 4,
     },
@@ -65,13 +65,13 @@ tap.test('Normal gql query should work', async (t) => {
   await server.close()
 })
 
-tap.test('A normal http request to another route should work', async (t) => {
+test('A normal http request to another route should work', async (t: TestContext) => {
   const server = build()
   await server.ready()
   const res = await server.inject({ method: 'GET', url: '/' })
 
-  t.same(res.statusCode, 200)
-  t.same(res.headers['content-type'], 'application/json; charset=utf-8')
-  t.same(JSON.parse(res.payload), { hello: 'world' })
+  t.assert.strictEqual(res.statusCode, 200)
+  t.assert.strictEqual(res.headers['content-type'], 'application/json; charset=utf-8')
+  t.assert.deepStrictEqual(JSON.parse(res.payload), { hello: 'world' })
   await server.close()
 })

@@ -29,24 +29,22 @@
   ],
   "scripts": {
     "prepack": "tsc && prettier --write dist index.ts test",
-    "test": "tap --ts --100 test/*.test.ts"
+    "test": "node --require ts-node/register --test test/*.test.ts"
   },
   "dependencies": {
-    "fastify-plugin": "^5.0.1",
-    "graphql-upload-minimal": "^1.6.1"
+    "fastify-plugin": "^5.1.0",
+    "graphql-upload-minimal": "^1.6.4"
   },
   "devDependencies": {
-    "@types/node": "^20.5.0",
-    "@types/tap": "^15.0.7",
-    "cross-env": "^7.0.3",
-    "fastify": "^5.0.0",
-    "form-data": "^4.0.1",
-    "graphql": "^16.5.0",
-    "mercurius": "^15.0.0",
-    "prettier": "^3.3.3",
-    "tap": "^16.2.0",
+    "@types/node": "^24.10.4",
+    "borp": "^0.21.0",
+    "fastify": "^5.6.2",
+    "form-data": "^4.0.5",
+    "graphql": "^16.12.0",
+    "mercurius": "^16.6.0",
+    "prettier": "^3.7.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "graphql": "^16.3.0"
